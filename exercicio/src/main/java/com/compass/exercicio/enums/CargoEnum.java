@@ -8,6 +8,5 @@ public enum CargoEnum {
     SENADOR,
     GOVERNADOR,
     PRESIDENTE,
-    NENHUM;
-
+    NENHUM
 }

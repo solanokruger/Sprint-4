@@ -1,46 +1,31 @@
-package com.compass.exercicio.modelo;
+package com.compass.exercicio.dto.response;
 
 import com.compass.exercicio.enums.CargoEnum;
 import com.compass.exercicio.enums.SexoEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import lombok.*;
-import org.springframework.lang.Nullable;
+import com.compass.exercicio.modelo.Associado;
+import com.compass.exercicio.modelo.Partido;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@ToString
-@Entity
-@Table(name = "ASSOCIADO")
-public class Associado {
+public class AssociadoResponseDTO {
 
-    @Id
-    @Column(name = "ID", updatable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(name = "NOME")
+    private Long id;
     private String nome;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "CARGO_POLITICO")
     private CargoEnum cargo;
-
-    @Column(name = "DATA_NASCIMENTO")
     private LocalDate dataNascimento;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "SEXO")
     private SexoEnum sexoEnum;
-
-    @ManyToOne
-    @Nullable
     private Partido partido;
 
-    public Associado(String nome, CargoEnum cargo, LocalDate dataNascimento, SexoEnum sexoEnum, @Nullable Partido partido) {
+    public AssociadoResponseDTO(Long id, String nome, CargoEnum cargo, LocalDate dataNascimento, SexoEnum sexoEnum, Partido partido) {
+        this.id = id;
         this.nome = nome;
         this.cargo = cargo;
         this.dataNascimento = dataNascimento;
@@ -48,14 +33,18 @@ public class Associado {
         this.partido = partido;
     }
 
-    public Associado() {
+    public AssociadoResponseDTO(Associado associado) {
     }
 
-    public long getId() {
+    public static List<AssociadoResponseDTO> converter(List<Associado> associados){
+        return associados.stream().map(AssociadoResponseDTO::new).collect(Collectors.toList());
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -91,12 +80,11 @@ public class Associado {
         this.sexoEnum = sexoEnum;
     }
 
-    @Nullable
     public Partido getPartido() {
         return partido;
     }
 
-    public void setPartido(@Nullable Partido partido) {
+    public void setPartido(Partido partido) {
         this.partido = partido;
     }
 }

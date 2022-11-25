@@ -4,12 +4,11 @@ import com.compass.exercicio.enums.IdeologiaEnum;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Entity
 @Table(name = "PARTIDO")
@@ -31,6 +30,15 @@ public class Partido {
     private IdeologiaEnum ideologiaEnum;
 
     @Column(name = "DATA")
-    private Date dataFundacao;
+    private LocalDate dataFundacao;
 
+    public Partido(String nome, String sigla, IdeologiaEnum ideologiaEnum, LocalDate dataFundacao) {
+        this.nome = nome;
+        this.sigla = sigla;
+        this.ideologiaEnum = ideologiaEnum;
+        this.dataFundacao = dataFundacao;
+    }
+
+    public Partido() {
+    }
 }
