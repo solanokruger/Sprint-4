@@ -17,4 +17,6 @@ public interface AssociadoRepositorio extends JpaRepository<Associado, Long> {
     List<Associado> findAllByPartido(Long id);
 
     Page<Associado> findAllByCargo(CargoEnum cargo, Pageable pageable);
+
+
 }

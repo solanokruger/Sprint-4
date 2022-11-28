@@ -1,35 +1,38 @@
 package com.compass.exercicio.modelo;
 
 import com.compass.exercicio.enums.IdeologiaEnum;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
 @ToString
-@Entity
-@Table(name = "PARTIDO")
+@Entity(name = "Partido")
+@Table(name = "partido")
+@NoArgsConstructor
 public class Partido {
 
     @Id
-    @Column(name = "ID", updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NOME")
+    @Column(nullable = false)
     private String nome;
 
-    @Column(name = "SIGLA")
+    @Column(nullable = false)
     private String sigla;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "IDEOLOGIA")
     private IdeologiaEnum ideologia;
 
-    @Column(name = "DATA")
+    @Column(nullable = false, name = "data_fundacao")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dataFundacao;
 
     public Partido(String nome, String sigla, IdeologiaEnum ideologia, LocalDate dataFundacao) {
@@ -39,6 +42,4 @@ public class Partido {
         this.dataFundacao = dataFundacao;
     }
 
-    public Partido() {
-    }
 }

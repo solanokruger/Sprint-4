@@ -2,6 +2,7 @@ package com.compass.exercicio.dto.request;
 
 import com.compass.exercicio.enums.CargoEnum;
 import com.compass.exercicio.enums.SexoEnum;
+import com.compass.exercicio.modelo.Associado;
 import com.compass.exercicio.modelo.Partido;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -20,22 +21,18 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class AssociadoRequestDTO {
 
-    @NotBlank
     private String nome;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
     private CargoEnum cargo;
-
-    @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dataNascimento;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
     private SexoEnum sexoEnum;
-
-    @Nullable
     private Partido partido;
 
+    public Associado converter(AssociadoRequestDTO associadoRequestDTO) {
+        return new Associado(
+                nome = associadoRequestDTO.nome,
+                cargo = associadoRequestDTO.cargo,
+                dataNascimento = associadoRequestDTO.dataNascimento,
+                sexoEnum = associadoRequestDTO.sexoEnum,
+                partido = associadoRequestDTO.partido);
+    }
 }

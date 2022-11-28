@@ -27,7 +27,8 @@ public class AssociadoService {
     private final ModelMapper modelMapper;
 
     public AssociadoResponseDTO criar(AssociadoRequestDTO associadoRequestDTO){
-        Associado associado = modelMapper.map(associadoRequestDTO, Associado.class);
+
+        Associado associado = associadoRequestDTO.converter(associadoRequestDTO);
         Associado associadoCriado = associadoRepositorio.save(associado);
         return modelMapper.map(associadoCriado, AssociadoResponseDTO.class);
     }

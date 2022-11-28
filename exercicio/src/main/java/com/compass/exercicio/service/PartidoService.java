@@ -57,4 +57,8 @@ public class PartidoService {
 
             return modelMapper.map(partidoAtualizado, PartidoResponseDTO.class);
     }
+
+    public void deletarPartido(Long id) {
+        partidoRepositorio.deleteById(id);
+    }
 }

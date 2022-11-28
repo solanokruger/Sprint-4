@@ -16,17 +16,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PartidoRequestDTO {
 
-    @NotBlank
     private String nome;
-
-    @NotBlank
     private String sigla;
-
-    @Enumerated(EnumType.STRING)
-    @NotNull
     private IdeologiaEnum ideologia;
-
-    @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dataFundacao;
 }

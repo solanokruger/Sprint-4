@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Part;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
@@ -57,6 +58,13 @@ public class PartidoController {
         PartidoResponseDTO partidoResponseDTO =
                 partidoService.atualizarPorId(id, partidoRequestDTO);
         return ResponseEntity.status(HttpStatus.OK).body(partidoResponseDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<PartidoResponseDTO> deletarPartido(@PathVariable Long id){
+        partidoService.deletarPartido(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

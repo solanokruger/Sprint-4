@@ -6,6 +6,9 @@ import com.compass.exercicio.enums.CargoEnum;
 import com.compass.exercicio.repositorio.AssociadoRepositorio;
 import com.compass.exercicio.service.AssociadoService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +20,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/associados")
+@Slf4j
 @RequiredArgsConstructor
 public class AssociadoController {
 
-    private final AssociadoRepositorio associadoRepositorio;
+    private static Logger logger = LoggerFactory.getLogger(AssociadoService.class);
 
+    private final AssociadoRepositorio associadoRepositorio;
     private final AssociadoService associadoService;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<AssociadoResponseDTO> cadastrarAssociadoSemPartido(@RequestBody @Valid AssociadoRequestDTO associadoRequestDTO){
+    public ResponseEntity<AssociadoResponseDTO> cadastrarAssociado(@RequestBody AssociadoRequestDTO associadoRequestDTO){
+        logger.info("cadastrarAssociado");
         AssociadoResponseDTO associadoResponseDTO = associadoService.criar(associadoRequestDTO);
+        logger.info("Fim do metodo");
         return ResponseEntity.status(HttpStatus.CREATED).body(associadoResponseDTO);
     }
 

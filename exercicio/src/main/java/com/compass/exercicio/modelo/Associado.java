@@ -1,10 +1,12 @@
 package com.compass.exercicio.modelo;
 
-import com.compass.exercicio.dto.response.AssociadoResponseDTO;
+import com.compass.exercicio.dto.request.AssociadoRequestDTO;
 import com.compass.exercicio.enums.CargoEnum;
 import com.compass.exercicio.enums.SexoEnum;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -13,29 +15,27 @@ import java.time.LocalDate;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "ASSOCIADO")
+@Entity(name = "Associado")
+@Table(name = "associado")
 public class Associado {
 
     @Id
-    @Column(name = "ID", updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "NOME")
+    @Column(nullable = false)
     private String nome;
 
     @Enumerated(EnumType.STRING)
- //   @Convert(converter = Converter.class)
-    @Column(name = "CARGO_POLITICO")
+    //   @Convert(converter = Converter.class)
     private CargoEnum cargo;
 
-    @Column(name = "DATA_NASCIMENTO")
+    @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dataNascimento;
 
     @Enumerated(EnumType.STRING)
 //    @Convert(converter = Converter.class)
-    @Column(name = "SEXO")
     private SexoEnum sexoEnum;
 
     @ManyToOne
@@ -49,5 +49,10 @@ public class Associado {
         this.sexoEnum = sexoEnum;
         this.partido = partido;
     }
+
+    public Associado converter(AssociadoRequestDTO associadoRequestDTO){
+        return new Associado(nome, cargo, dataNascimento, sexoEnum, partido);
+    }
+
 
 }
