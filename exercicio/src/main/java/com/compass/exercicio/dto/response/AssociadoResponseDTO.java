@@ -4,11 +4,7 @@ import com.compass.exercicio.enums.CargoEnum;
 import com.compass.exercicio.enums.SexoEnum;
 import com.compass.exercicio.modelo.Associado;
 import com.compass.exercicio.modelo.Partido;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +17,7 @@ public class AssociadoResponseDTO {
     private String nome;
     private CargoEnum cargo;
     private LocalDate dataNascimento;
+
     private SexoEnum sexoEnum;
     private Partido partido;
 
@@ -33,58 +30,22 @@ public class AssociadoResponseDTO {
         this.partido = partido;
     }
 
-    public AssociadoResponseDTO(Associado associado) {
+    public AssociadoResponseDTO(Associado associado){
+        this.id = associado.getId();
+        this.nome = associado.getNome();
+        this.cargo = associado.getCargo();
+        this.dataNascimento = associado.getDataNascimento();
+        this.sexoEnum = associado.getSexoEnum();
+        this.partido = associado.getPartido();
+    }
+
+    public AssociadoResponseDTO(){
     }
 
     public static List<AssociadoResponseDTO> converter(List<Associado> associados){
         return associados.stream().map(AssociadoResponseDTO::new).collect(Collectors.toList());
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public CargoEnum getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(CargoEnum cargo) {
-        this.cargo = cargo;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public SexoEnum getSexoEnum() {
-        return sexoEnum;
-    }
-
-    public void setSexoEnum(SexoEnum sexoEnum) {
-        this.sexoEnum = sexoEnum;
-    }
-
-    public Partido getPartido() {
-        return partido;
-    }
-
-    public void setPartido(Partido partido) {
-        this.partido = partido;
-    }
 }

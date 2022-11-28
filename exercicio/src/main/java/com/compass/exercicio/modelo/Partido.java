@@ -17,7 +17,7 @@ public class Partido {
     @Id
     @Column(name = "ID", updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "NOME")
     private String nome;
@@ -27,15 +27,15 @@ public class Partido {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "IDEOLOGIA")
-    private IdeologiaEnum ideologiaEnum;
+    private IdeologiaEnum ideologia;
 
     @Column(name = "DATA")
     private LocalDate dataFundacao;
 
-    public Partido(String nome, String sigla, IdeologiaEnum ideologiaEnum, LocalDate dataFundacao) {
+    public Partido(String nome, String sigla, IdeologiaEnum ideologia, LocalDate dataFundacao) {
         this.nome = nome;
         this.sigla = sigla;
-        this.ideologiaEnum = ideologiaEnum;
+        this.ideologia = ideologia;
         this.dataFundacao = dataFundacao;
     }
 
