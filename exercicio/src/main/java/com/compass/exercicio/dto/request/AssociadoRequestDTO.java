@@ -17,6 +17,7 @@ import java.time.LocalDate;
 
 
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AssociadoRequestDTO {

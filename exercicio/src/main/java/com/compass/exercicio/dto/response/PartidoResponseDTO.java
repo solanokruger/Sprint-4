@@ -3,6 +3,7 @@ package com.compass.exercicio.dto.response;
 import com.compass.exercicio.enums.IdeologiaEnum;
 import com.compass.exercicio.modelo.Partido;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

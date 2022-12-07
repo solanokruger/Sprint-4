@@ -32,7 +32,6 @@ public class Partido {
     private IdeologiaEnum ideologia;
 
     @Column(nullable = false, name = "data_fundacao")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dataFundacao;
 
     public Partido(String nome, String sigla, IdeologiaEnum ideologia, LocalDate dataFundacao) {
